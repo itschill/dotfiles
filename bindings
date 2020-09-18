@@ -1,3 +1,4 @@
 nvim/.vimrc ~/.vimrc
 git/.gitconfig ~/.gitconfig
 zsh/.zshrc ~/.zshrc
+zsh/zsh_aliases.zsh ~/.oh-my-zsh/custom/zsh_aliases.zsh
