@@ -1,3 +1,4 @@
+set nocompatible
 filetype plugin indent on
 
 "
@@ -63,12 +64,6 @@ set nowritebackup   " No backup before overwriting a file
 set nowrap  " Don't wrap lines
 set list    " Higlight bad characters
 set listchars=tab:̣⭾,nbsp:␣,trail:·
-
-" Fix page up/down
-noremap <silent> <PageUp> 1000<C-U>
-noremap <silent> <PageDown> 1000<C-D>
-inoremap <silent> <PageUp> <C-O>1000<C-U>
-inoremap <silent> <PageDown> <C-O>1000<C-D>
 
 " Plugins
 " Specify a directory for plugins
@@ -196,6 +191,12 @@ set statusline+=%{GitStatus()}
 "
 nnoremap ; :
 nnoremap : ;
+
+" Fix page up/down
+noremap <silent> <PageUp> 1000<C-U>
+noremap <silent> <PageDown> 1000<C-D>
+inoremap <silent> <PageUp> <C-O>1000<C-U>
+inoremap <silent> <PageDown> <C-O>1000<C-D>
 
 " Force saving files that require root permission
 cnoremap w!! w !sudo tee % > /dev/null
