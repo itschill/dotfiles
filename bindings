@@ -1,2 +1,3 @@
 nvim/.vimrc ~/.vimrc
 git/.gitconfig ~/.gitconfig
+zsh/.zshrc ~/.zshrc
