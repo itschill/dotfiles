@@ -1,0 +1,82 @@
+[user]
+	name = imsochill
+    #email = nope@email.com
+
+[core]
+	excludesfile = ~/.gitignore
+
+[push]
+	default = simple
+
+[alias]
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	unstage = reset HEAD --
+	uncommit = reset --soft HEAD^ --
+	last = log -1 HEAD --stat
+	fmerge = merge --no-ff
+	di = diff --patience
+	gr = grep --break --heading --line-number
+	lg = log --date=short --format='%C(yellow)%h%Creset %C(cyan)%<(16,trunc)%an%Creset %C(green)%ad%Creset %s%C(red)%d%Creset'
+    uplg = !git fetch --quiet && git lg HEAD...@{u}
+	uplog = !git fetch --quiet && git log HEAD...@{u}
+	tags = !git log --tags --no-walk --reverse --date=short --format='%C(cyan)%<(24,trunc)%an%Creset %C(green)%ad%Creset %C(red)%D%Creset' | sed 's/tag: //g'
+	tree = !git lg --graph --all
+    branches = !git branch -a | xargs -n1 git log -n1 --date=short --format='%C(cyan)%<(16,trunc)%an%Creset %C(green)%ad%Creset %D' 2>/dev/null | sort | uniq
+	delrembr = push origin --delete
+	dit = difftool -d
+	adog = log --all --decorate --oneline --graph
+    mr=!git push -u origin $(git symbolic-ref --short HEAD) -o merge_request.create
+
+[credential]
+	helper = cache --timeout=600
+
+[branch "master"]
+
+[core]
+	editor = vim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+
+[color]
+	ui = true
+
+[grep]
+	lineNumber = true
+	extendRegexp = true
+
+[diff]
+	renames = copy
+	renameLimit = 5000
+	compactionHeuristic = true
+	algorithm = patience
+
+[gc]
+	auto = 1024
+
+[log]
+	decorate = short
+
+[color "diff"]
+
+[pull]
+	ff = only
+
+[merge]
+	tool = meld
+
+[rerere]
+	enabled = true
+
+[status]
+	submodulesummary = 1
+
+[stash]
+    showPatch = true
+
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
