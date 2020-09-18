@@ -1,7 +1,13 @@
 #! /usr/bin/env bash
 
-# The dtotfiles directory.
+# The dotfiles directory.
 directory="$PWD"
 
-ln -sfn "$directory"/nvim/.vimrc ~/.vimrc
-ln -sfn "$directory"/git/.gitconfig ~/.gitconfig
+# The symlinks file.
+bindings=bindings
+
+while read -r file link; do
+    filepath="$directory/$file"
+    echo "Binding $link to file $filepath"
+    ln -sfn "$filepath" $(eval echo "$link")
+done < $bindings

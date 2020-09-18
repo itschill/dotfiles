@@ -1,0 +1,1 @@
+/home/cool/code/dotfiles/nvim/.vimrc
