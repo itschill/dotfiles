@@ -7,3 +7,4 @@ xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 xmonad/xmonadctl.hs ~/.xmonad/xmonadctl.hs
 x/Xresources ~/.Xresources
 alacritty/alacritty.yml ~/.alacritty.yml
+lxdm/lxdm.conf /etc/lxdm/lxdm.conf
