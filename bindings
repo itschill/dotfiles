@@ -6,3 +6,4 @@ xmobar/xmobarrc ~/.xmobarrc
 xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 xmonad/xmonadctl.hs ~/.xmonad/xmonadctl.hs
 x/Xresources ~/.Xresources
+alacritty/alacritty.yml ~/.alacritty.yml
