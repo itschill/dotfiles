@@ -1,10 +1,11 @@
-nvim/vimrc ~/.vimrc
+alacritty/alacritty.yml ~/.alacritty.yml
 git/gitconfig ~/.gitconfig
-zsh/zshrc ~/.zshrc
-zsh/zsh_aliases.zsh ~/.oh-my-zsh/custom/zsh_aliases.zsh
+gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
+lxdm/lxdm.conf /etc/lxdm/lxdm.conf
+nvim/vimrc ~/.vimrc
+x/Xresources ~/.Xresources
 xmobar/xmobarrc ~/.xmobarrc
 xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 xmonad/xmonadctl.hs ~/.xmonad/xmonadctl.hs
-x/Xresources ~/.Xresources
-alacritty/alacritty.yml ~/.alacritty.yml
-lxdm/lxdm.conf /etc/lxdm/lxdm.conf
+zsh/zsh_aliases.zsh ~/.oh-my-zsh/custom/zsh_aliases.zsh
+zsh/zshrc ~/.zshrc
