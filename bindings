@@ -1,8 +1,8 @@
-nvim/.vimrc ~/.vimrc
-git/.gitconfig ~/.gitconfig
-zsh/.zshrc ~/.zshrc
+nvim/vimrc ~/.vimrc
+git/gitconfig ~/.gitconfig
+zsh/zshrc ~/.zshrc
 zsh/zsh_aliases.zsh ~/.oh-my-zsh/custom/zsh_aliases.zsh
-xmobar/.xmobarrc ~/.xmobarrc
+xmobar/xmobarrc ~/.xmobarrc
 xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 xmonad/xmonadctl.hs ~/.xmonad/xmonadctl.hs
-x/.Xresources ~/.Xresources
+x/Xresources ~/.Xresources
