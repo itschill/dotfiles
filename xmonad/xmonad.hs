@@ -145,14 +145,7 @@ spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
 
 myAppGrid = [ ("Audacity", "audacity")
                  , ("Deadbeef", "deadbeef")
-                 , ("Emacs", "emacsclient -c -a emacs")
                  , ("Firefox", "firefox")
-                 , ("Geany", "geany")
-                 , ("Geary", "geary")
-                 , ("Gimp", "gimp")
-                 , ("Kdenlive", "kdenlive")
-                 , ("LibreOffice Impress", "loimpress")
-                 , ("LibreOffice Writer", "lowriter")
                  , ("OBS", "obs")
                  , ("PCManFM", "pcmanfm")
                  ]
