@@ -5,3 +5,4 @@ zsh/zsh_aliases.zsh ~/.oh-my-zsh/custom/zsh_aliases.zsh
 xmobar/.xmobarrc ~/.xmobarrc
 xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 xmonad/xmonadctl.hs ~/.xmonad/xmonadctl.hs
+x/.Xresources ~/.Xresources
