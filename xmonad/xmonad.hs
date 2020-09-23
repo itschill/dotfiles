@@ -773,22 +773,6 @@ myKeys =
         , ("M-u h", spawn "mocp --previous")
         , ("M-u <Space>", spawn "mocp --toggle-pause")
 
-    --- My Applications (Super+Alt+Key)
-        , ("M-M1-a", spawn (myTerminal ++ " -e ncpamixer"))
-        , ("M-M1-b", spawn "surf www.youtube.com/c/DistroTube/")
-        , ("M-M1-e", spawn (myTerminal ++ " -e neomutt"))
-        , ("M-M1-f", spawn (myTerminal ++ " -e sh ./.config/vifm/scripts/vifmrun"))
-        , ("M-M1-i", spawn (myTerminal ++ " -e irssi"))
-        , ("M-M1-j", spawn (myTerminal ++ " -e joplin"))
-        , ("M-M1-l", spawn (myTerminal ++ " -e lynx https://distrotube.com"))
-        , ("M-M1-m", spawn (myTerminal ++ " -e mocp"))
-        , ("M-M1-n", spawn (myTerminal ++ " -e newsboat"))
-        , ("M-M1-p", spawn (myTerminal ++ " -e pianobar"))
-        , ("M-M1-r", spawn (myTerminal ++ " -e rtv"))
-        , ("M-M1-t", spawn (myTerminal ++ " -e toot curses"))
-        , ("M-M1-w", spawn (myTerminal ++ " -e wopr report.xml"))
-        , ("M-M1-y", spawn (myTerminal ++ " -e youtube-viewer"))
-
     -- Multimedia Keys
         , ("<XF86AudioPlay>", spawn "cmus toggle")
         , ("<XF86AudioPrev>", spawn "cmus prev")
