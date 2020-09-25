@@ -1,7 +1,7 @@
+#lxdm/lxdm.conf /etc/lxdm/lxdm.conf # breaks lxdm
 alacritty/alacritty.yml ~/.alacritty.yml
 git/gitconfig ~/.gitconfig
 gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
-lxdm/lxdm.conf /etc/lxdm/lxdm.conf
 nvim/vimrc ~/.vimrc
 x/Xresources ~/.Xresources
 xmobar/xmobarrc ~/.xmobarrc

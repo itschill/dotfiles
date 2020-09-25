@@ -10,8 +10,16 @@ directory="$PWD"
 bindings=bindings
 
 while read -r file destination; do
+    [[ $file =~ ^#.* ]] && continue # ignore commented lines
+
     filepath="$directory/$file"
     link="${destination//\~/\~$user}"
-    echo "Binding $link to file $filepath"
+
+    if [ -e $filepath ]; then
+        echo "Binding $link to file $filepath"
+    else
+        echo "File $filepath does not exist, ignoring"
+    fi
+
     ln -sfn "$filepath" $(eval echo "$link")
 done < $bindings
