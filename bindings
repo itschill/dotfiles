@@ -7,5 +7,6 @@ x/Xresources ~/.Xresources
 xmobar/xmobarrc ~/.xmobarrc
 xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 xmonad/xmonadctl.hs ~/.xmonad/xmonadctl.hs
+zsh/bullet-train.zsh-theme ~/.oh-my-zsh/custom/themes/bullet-train.zsh-theme
 zsh/zsh_aliases.zsh ~/.oh-my-zsh/custom/zsh_aliases.zsh
 zsh/zshrc ~/.zshrc
