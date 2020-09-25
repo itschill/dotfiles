@@ -3,6 +3,7 @@ alacritty/alacritty.yml ~/.alacritty.yml
 git/gitconfig ~/.gitconfig
 gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
 nvim/vimrc ~/.vimrc
+redshift/redshift.conf ~/.config/redshift/redshift.conf
 x/Xresources ~/.Xresources
 xmobar/xmobarrc ~/.xmobarrc
 xmonad/xmonad.hs ~/.xmonad/xmonad.hs
