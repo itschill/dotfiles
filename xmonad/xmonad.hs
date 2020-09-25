@@ -91,10 +91,10 @@ myBorderWidth :: Dimension
 myBorderWidth = 2          -- Sets border width for windows
 
 myNormColor :: String
-myNormColor   = "#000077"  -- Border color of normal windows
+myNormColor   = "#81a2be"  -- Border color of normal windows
 
 myFocusColor :: String
-myFocusColor  = "#0000ff"  -- Border color of focused windows
+myFocusColor  = "#e6c547"  -- Border color of focused windows
 
 altMask :: KeyMask
 altMask = mod1Mask         -- Setting this for use in xprompts
@@ -435,11 +435,11 @@ myTreeNavigation = M.fromList
 myXPConfig :: XPConfig
 myXPConfig = def
       { font                = myFont
-      , bgColor             = "#292d3e"
-      , fgColor             = "#d0d0d0"
-      , bgHLight            = "#c6e2ff"
-      , fgHLight            = "#000000"
-      , borderColor         = "#535974"
+      , bgColor             = "#1d1f21"
+      , fgColor             = "#81a2be"
+      , bgHLight            = "#81a2be"
+      , fgHLight            = "#1d1f21"
+      , borderColor         = "#1d1f21"
       , promptBorderWidth   = 0
       , promptKeymap        = myXPKeymap
       , position            = Top
@@ -525,30 +525,22 @@ myXPKeymap = M.fromList $
      , (xK_Escape, quit)
      ]
 
-archwiki, ebay, news, reddit, urban :: S.SearchEngine
+archwiki :: S.SearchEngine
 
 archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
-ebay     = S.searchEngine "ebay" "https://www.ebay.com/sch/i.html?_nkw="
-news     = S.searchEngine "news" "https://news.google.com/search?q="
-reddit   = S.searchEngine "reddit" "https://www.reddit.com/search/?q="
-urban    = S.searchEngine "urban" "https://www.urbandictionary.com/define.php?term="
 
 -- This is the list of search engines that I want to use. Some are from
 -- XMonad.Actions.Search, and some are the ones that I added above.
 searchList :: [(String, S.SearchEngine)]
 searchList = [ ("a", archwiki)
              , ("d", S.duckduckgo)
-             , ("e", ebay)
              , ("g", S.google)
              , ("h", S.hoogle)
              , ("i", S.images)
-             , ("n", news)
-             , ("r", reddit)
              , ("s", S.stackage)
              , ("t", S.thesaurus)
              , ("v", S.vocabulary)
              , ("b", S.wayback)
-             , ("u", urban)
              , ("w", S.wikipedia)
              , ("y", S.youtube)
              , ("z", S.amazon)
@@ -663,7 +655,7 @@ xmobarEscape = concatMap doubleLts
 
 myWorkspaces :: [String]
 myWorkspaces = clickable . (map xmobarEscape)
-               $ ["\61728", "\61724", "\62057"]
+               $ ["\61728", "\61724", "\62057", "💬🗪\1F5EA", "∆⋯", "𝅘𝅥𝅮🎜"]
   where
         clickable l = [ "<action=xdotool key super+" ++ show (n) ++ "> " ++ ws ++ " </action>" |
                       (i,ws) <- zip [1..9] l,
@@ -677,11 +669,7 @@ myManageHook = composeAll
      [ className =? "htop"     --> doShift ( myWorkspaces !! 7 )
      , title =? "firefox"     --> doShift ( myWorkspaces !! 1 )
      , className =? "mpv"     --> doShift ( myWorkspaces !! 7 )
-     -- , className =? "vlc"     --> doShift ( myWorkspaces !! 7 )
-     , className =? "Gimp"    --> doShift ( myWorkspaces !! 8 )
-     , className =? "Gimp"    --> doFloat
-     , title =? "Oracle VM VirtualBox Manager"     --> doFloat
-     , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )
+     , className =? "vlc"     --> doShift ( myWorkspaces !! 7 )
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
 
