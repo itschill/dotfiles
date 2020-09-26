@@ -189,8 +189,8 @@ set statusline+=%{GitStatus()}
 "
 " Commands
 "
-nnoremap ; :
-nnoremap : ;
+noremap ; :
+noremap : ;
 
 " Fix page up/down
 noremap <silent> <PageUp> 1000<C-U>
