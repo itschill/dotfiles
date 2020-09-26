@@ -72,7 +72,7 @@ import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
 
 myFont :: String
-myFont = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixelsize=16:antialias=true:hinting=true"
+myFont = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixelsize=22:antialias=true:hinting=true"
 
 myModMask :: KeyMask
 myModMask = mod4Mask       -- Sets modkey to super/windows key
