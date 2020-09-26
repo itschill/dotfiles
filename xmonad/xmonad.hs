@@ -102,10 +102,7 @@ windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 myStartupHook :: X ()
-myStartupHook = do
-          spawnOnce "feh --bg-scale /usr/share/backgrounds/wp3221416-wallpapers-dark.jpg"
-          spawnOnce "picom &"
-          spawnOnce "nm-applet &"
+myStartupHook = ()
 
 spawnSelected' :: [(String, String)] -> X ()
 spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn

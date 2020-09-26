@@ -3,4 +3,6 @@
 # Executed by startx
 
 ~/.fehbg &
+picom &
+nm-applet &
 redshift &
