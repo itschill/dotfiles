@@ -16,18 +16,85 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
        , allDesktops        = True
        , persistent         = True
        , iconRoot           = "~/.xmonad/xpm/"  -- default: "."
-       , commands           =   [
-                                  Run Date "<fn=1>\xf133 </fn> %b %d %Y (%H:%M)" "date" 50
-                                , Run Network "enp6s0" ["-t", "<fn=1>\xf0aa</fn> <rx>kb  <fn=1>\xf0ab</fn> <tx>kb"] 20
-                                , Run Cpu ["-t", "<fn=1>\xf108 </fn> cpu: (<total>%)","-H","50","--high","red"] 20
-                                , Run Memory ["-t", "<fn=1>\xf233 </fn> mem: <used>M (<usedratio>%)"] 20
-                                , Run DiskU [("/", "<fn=1>\xf0c7 </fn> hdd: <free> free")] [] 60
-                                , Run Com "uname" ["-r"] "" 3600
-                                  -- Prints out the left side items such as workspaces, layout, etc.
-                                , Run UnsafeStdinReader
-                                ]
        , sepChar            = "%"
        , alignSep           = "}{"
-       , template           = "  λ <fc=#666666>|</fc> %UnsafeStdinReader% }{ <fc=#b3afc2><fn=1> </fn>%uname% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#FFB86C> %cpu% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#FF5555> %memory% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#82AAFF> %disku% </fc><fc=#666666> <fn=2>|</fn></fc> <fc=#8BE9FD> %date%  </fc>"
-       }
+       , template           = "  λ  %UnsafeStdinReader% }{ %RJTT% <fc=#666666>|</fc> %kbd% <fc=#666666>|</fc> %dynnetwork% <fc=#666666>|</fc> %multicpu% <fc=#666666>|</fc> %memory% <fc=#666666>|</fc> %coretemp% <fc=#666666>|</fc> %disku% <fc=#666666>|</fc> %battery% <fc=#666666>|</fc> %date% "
+       , commands           = [
+                                -- Prints out the left side items such as workspaces, layout, etc.
+                                  Run UnsafeStdinReader
 
+                                -- weather monitor
+                                , Run Weather "RJTT" [ "--template", "<fc=#B3AFC2>\xf123 <skyCondition> \xf104 <fc=#4682B4><tempC></fc>°C \xf777 <fc=#4682B4><rh></fc>%</fc>"
+                                                     ] 36000
+
+                                -- disk free space monitor
+                                , Run DiskU [("/", "<fc=#82AAFF>\xf0c7  <free></fc>")]
+                                                     [ "--Low", "20"
+                                                     , "--High", "50"
+                                                     , "-m", "1"
+                                                     , "-p", "3"
+                                                     ] 60
+
+                                -- network activity monitor (dynamic interface resolution)
+                                , Run DynNetwork     [ "--template" , "<fc=#44ff44>\xf0aa <tx>kB/s|\xf0ab <rx>kB/s</fc>"
+                                                     , "--Low"      , "1000"       -- units: B/s
+                                                     , "--High"     , "5000"       -- units: B/s
+                                                     , "--low"      , "lightgreen"
+                                                     , "--normal"   , "lightorange"
+                                                     , "--high"     , "lightred"
+                                                     ] 10
+
+                                -- cpu activity monitor
+                                , Run MultiCpu       [ "--template" , "<fc=#FFB86C>\xf108  <total0>%</fc>"
+                                                     , "--Low"      , "50"         -- units: %
+                                                     , "--High"     , "85"         -- units: %
+                                                     , "--low"      , "lightgreen"
+                                                     , "--normal"   , "lightorange"
+                                                     , "--high"     , "lightred"
+                                                     ] 10
+
+                                -- cpu core temperature monitor
+                                , Run CoreTemp       [ "--template" , "<fc=#ff3311>\xf432  <core0>°C</fc>"
+                                                     , "--Low"      , "60"        -- units: °C
+                                                     , "--High"     , "80"        -- units: °C
+                                                     , "--low"      , "lightgreen"
+                                                     , "--normal"   , "lightorange"
+                                                     , "--high"     , "lightred"
+                                                     ] 50
+
+                                -- memory usage monitor
+                                , Run Memory         [ "--template" ,"<fc=#FF5555>\xf233  <usedratio>%</fc>"
+                                                     , "--Low"      , "20"        -- units: %
+                                                     , "--High"     , "90"        -- units: %
+                                                     , "--low"      , "lightgreen"
+                                                     , "--normal"   , "lightorange"
+                                                     , "--high"     , "lightred"
+                                                     ] 10
+
+                                -- battery monitor
+                                , Run Battery        [ "--template" , "<fc=#EEEEEE>\xf253  <acstatus></fc>"
+                                                     , "--Low"      , "15"        -- units: %
+                                                     , "--High"     , "80"        -- units: %
+                                                     , "--low"      , "lightred"
+                                                     , "--normal"   , "lightorange"
+                                                     , "--high"     , "lightgreen"
+
+                                                     , "--" -- battery specific options
+                                                               -- discharging status
+                                                               , "-o", "<left>% (<timeleft>)"
+                                                               -- AC "on" status
+                                                               , "-O", "<fc=#dAA520>Charging</fc>"
+                                                               -- charged status
+                                                               , "-i", "<fc=#006000>Charged</fc>"
+                                                     ] 50
+
+                                -- time and date indicator
+                                --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
+                                , Run Date           "<fc=#8BE9FD>\xf133  %a %F %R</fc>" "date" 10
+
+                                -- keyboard layout indicator
+                                , Run Kbd            [ ("gb" , "<fc=#777777>\xf609  GB</fc>")
+                                                     , ("pt" , "<fc=#777777>\xf609  PT</fc>")
+                                                     ]
+                                ]
+}
