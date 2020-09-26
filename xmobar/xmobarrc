@@ -18,17 +18,17 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
        , iconRoot           = "~/.xmonad/xpm/"  -- default: "."
        , sepChar            = "%"
        , alignSep           = "}{"
-       , template           = "  λ  %UnsafeStdinReader% }{ %RJTT% <fc=#666666>|</fc> %kbd% <fc=#666666>|</fc> %dynnetwork% <fc=#666666>|</fc> %multicpu% <fc=#666666>|</fc> %memory% <fc=#666666>|</fc> %coretemp% <fc=#666666>|</fc> %disku% <fc=#666666>|</fc> %battery% <fc=#666666>|</fc> %date% "
+       , template           = "  λ  %UnsafeStdinReader% }{ %LPPT% <fc=#666666>|</fc> %kbd% <fc=#666666>|</fc> %dynnetwork% <fc=#666666>|</fc> %multicpu% <fc=#666666>|</fc> %memory% <fc=#666666>|</fc> %coretemp% <fc=#666666>|</fc> %disku% <fc=#666666>|</fc> %battery% <fc=#666666>|</fc> %date% "
        , commands           = [
                                 -- Prints out the left side items such as workspaces, layout, etc.
                                   Run UnsafeStdinReader
 
                                 -- weather monitor
-                                , Run Weather "RJTT" [ "--template", "<fc=#B3AFC2>\xf123 <skyCondition> \xf104 <fc=#4682B4><tempC></fc>°C \xf777 <fc=#4682B4><rh></fc>%</fc>"
+                                , Run Weather "LPPT" [ "--template", "<fc=#B3AFC2> <skyCondition>  <fc=#4682B4><tempC></fc>°C  <fc=#4682B4><rh></fc>%</fc>"
                                                      ] 36000
 
                                 -- disk free space monitor
-                                , Run DiskU [("/", "<fc=#82AAFF>\xf0c7  <free></fc>")]
+                                , Run DiskU [("/", "<fc=#82AAFF> <free></fc>")]
                                                      [ "--Low", "20"
                                                      , "--High", "50"
                                                      , "-m", "1"
@@ -36,7 +36,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 60
 
                                 -- network activity monitor (dynamic interface resolution)
-                                , Run DynNetwork     [ "--template" , "<fc=#44ff44>\xf0aa <tx>kB/s|\xf0ab <rx>kB/s</fc>"
+                                , Run DynNetwork     [ "--template" , "<fc=#44ff44> <tx>kB/s  <rx>kB/s</fc>"
                                                      , "--Low"      , "1000"       -- units: B/s
                                                      , "--High"     , "5000"       -- units: B/s
                                                      , "--low"      , "lightgreen"
@@ -45,7 +45,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 10
 
                                 -- cpu activity monitor
-                                , Run MultiCpu       [ "--template" , "<fc=#FFB86C>\xf108  <total0>%</fc>"
+                                , Run MultiCpu       [ "--template" , "<fc=#FFB86C> <total0>%</fc>"
                                                      , "--Low"      , "50"         -- units: %
                                                      , "--High"     , "85"         -- units: %
                                                      , "--low"      , "lightgreen"
@@ -54,7 +54,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 10
 
                                 -- cpu core temperature monitor
-                                , Run CoreTemp       [ "--template" , "<fc=#ff3311>\xf432  <core0>°C</fc>"
+                                , Run CoreTemp       [ "--template" , "<fc=#ff3311> <core0>°C</fc>"
                                                      , "--Low"      , "60"        -- units: °C
                                                      , "--High"     , "80"        -- units: °C
                                                      , "--low"      , "lightgreen"
@@ -63,7 +63,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 50
 
                                 -- memory usage monitor
-                                , Run Memory         [ "--template" ,"<fc=#FF5555>\xf233  <usedratio>%</fc>"
+                                , Run Memory         [ "--template" ,"<fc=#FF5555> <usedratio>%</fc>"
                                                      , "--Low"      , "20"        -- units: %
                                                      , "--High"     , "90"        -- units: %
                                                      , "--low"      , "lightgreen"
@@ -72,7 +72,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 10
 
                                 -- battery monitor
-                                , Run Battery        [ "--template" , "<fc=#EEEEEE>\xf253  <acstatus></fc>"
+                                , Run Battery        [ "--template" , "<fc=#EEEEEE>  <acstatus></fc>"
                                                      , "--Low"      , "15"        -- units: %
                                                      , "--High"     , "80"        -- units: %
                                                      , "--low"      , "lightred"
@@ -90,11 +90,11 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
 
                                 -- time and date indicator
                                 --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
-                                , Run Date           "<fc=#8BE9FD>\xf133  %a %F %R</fc>" "date" 10
+                                , Run Date           "<fc=#8BE9FD>  %a %F %R</fc>" "date" 10
 
                                 -- keyboard layout indicator
-                                , Run Kbd            [ ("gb" , "<fc=#777777>\xf609  GB</fc>")
-                                                     , ("pt" , "<fc=#777777>\xf609  PT</fc>")
+                                , Run Kbd            [ ("gb" , "<fc=#777777> GB</fc>")
+                                                     , ("pt" , "<fc=#777777> PT</fc>")
                                                      ]
                                 ]
 }
