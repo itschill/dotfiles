@@ -72,7 +72,7 @@ import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
 
 myFont :: String
-myFont = "xft:Mononoki Nerd Font:bold:size=8:antialias=true:hinting=true"
+myFont = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixelsize=16:antialias=true:hinting=true"
 
 myModMask :: KeyMask
 myModMask = mod4Mask       -- Sets modkey to super/windows key
@@ -84,7 +84,7 @@ myBrowser :: String
 myBrowser = "firefox"      -- Sets firefox as browser for tree select
 
 myEditor :: String
-myEditor = "nvim"           -- Sets nvim as editor for tree select
+myEditor = "nvim"          -- Sets nvim as editor for tree select
 
 myBorderWidth :: Dimension
 myBorderWidth = 2          -- Sets border width for windows
@@ -112,7 +112,7 @@ treeselectAction a = TS.treeselectAction a
        ]
    , Node (TS.TSNode "+ Internet" "internet and web programs" (return ()))
        [ Node (TS.TSNode "Discord" "Chat and video chat platform" (spawn "discord")) []
-       , Node (TS.TSNode "Firefox" "Open source web browser" (spawn "firefox")) []
+       , Node (TS.TSNode "Firefox" "Open source web browser" (spawn myBrowser)) []
        , Node (TS.TSNode "Thunderbird" "Open source email client" (spawn "thunderbird")) []
        ]
    , Node (TS.TSNode "------------------------" "" (spawn "xdotool key Escape")) []
@@ -318,12 +318,12 @@ mySpacing' i = spacingRaw True (Border i i i i) True (Border i i i i) True
 -- Defining a bunch of layouts, many that I don't use.
 tall     = renamed [Replace "tall"]
            $ limitWindows 12
-           $ mySpacing 4
+           $ mySpacing 24
            $ ResizableTall 1 (3/100) (1/2) []
 magnify  = renamed [Replace "magnify"]
            $ magnifier
            $ limitWindows 12
-           $ mySpacing 4
+           $ mySpacing 24
            $ ResizableTall 1 (3/100) (1/2) []
 monocle  = renamed [Replace "monocle"]
            $ limitWindows 20 Full
@@ -331,19 +331,19 @@ floats   = renamed [Replace "floats"]
            $ limitWindows 20 simplestFloat
 grid     = renamed [Replace "grid"]
            $ limitWindows 12
-           $ mySpacing 4
+           $ mySpacing 24
            $ mkToggle (single MIRROR)
            $ Grid (16/10)
 spirals  = renamed [Replace "spirals"]
-           $ mySpacing' 4
+           $ mySpacing' 24
            $ spiral (6/7)
 threeCol = renamed [Replace "threeCol"]
            $ limitWindows 7
-           $ mySpacing' 4
+           $ mySpacing' 24
            $ ThreeCol 1 (3/100) (1/2)
 threeRow = renamed [Replace "threeRow"]
            $ limitWindows 7
-           $ mySpacing' 4
+           $ mySpacing' 24
            -- Mirror takes a layout and rotates it by 90 degrees.
            -- So we are applying Mirror to the ThreeCol layout.
            $ Mirror
@@ -353,7 +353,7 @@ tabs     = renamed [Replace "tabs"]
            -- add spacing between window and tabs which looks bad.
            $ tabbed shrinkText myTabConfig
   where
-    myTabConfig = def { fontName            = "xft:Mononoki Nerd Font:regular:pixelsize=11"
+    myTabConfig = def { fontName            = myFont
                       , activeColor         = "#292d3e"
                       , inactiveColor       = "#3e445e"
                       , activeBorderColor   = "#292d3e"
@@ -365,7 +365,7 @@ tabs     = renamed [Replace "tabs"]
 -- Theme for showWName which prints current workspace when you change workspaces.
 myShowWNameTheme :: SWNConfig
 myShowWNameTheme = def
-    { swn_font              = "xft:Sans:bold:size=60"
+    { swn_font              = myFont
     , swn_fade              = 1.0
     , swn_bgcolor           = "#000000"
     , swn_color             = "#FFFFFF"
@@ -393,7 +393,7 @@ xmobarEscape = concatMap doubleLts
 
 myWorkspaces :: [String]
 myWorkspaces = clickable . (map xmobarEscape)
-               $ ["\61728", "\61724", "\62057", "💬🗪\1F5EA", "∆⋯", "𝅘𝅥𝅮🎜"]
+               $ ["\61728", "\62472", "\62057", "\61557", "\61761", "\61441", "\61448"]
   where
         clickable l = [ "<action=xdotool key super+" ++ show (n) ++ "> " ++ ws ++ " </action>" |
                       (i,ws) <- zip [1..9] l,
@@ -404,9 +404,7 @@ myManageHook = composeAll
      -- using 'doShift ( myWorkspaces !! 7)' sends program to workspace 8!
      -- I'm doing it this way because otherwise I would have to write out
      -- the full name of my workspaces.
-     [ className =? "htop"     --> doShift ( myWorkspaces !! 7 )
-     , title =? "firefox"     --> doShift ( myWorkspaces !! 1 )
-     , className =? "mpv"     --> doShift ( myWorkspaces !! 7 )
+     [ title =? "firefox"     --> doShift ( myWorkspaces !! 2 )
      , className =? "vlc"     --> doShift ( myWorkspaces !! 7 )
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
@@ -486,8 +484,8 @@ myKeys =
         -- , ("<XF86AudioMute>",   spawn "amixer set Master toggle")  -- Bug prevents it from toggling correctly in 12.04.
         , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
         , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
-        , ("<XF86HomePage>", spawn "firefox")
-        , ("<XF86Search>", safeSpawn "firefox" ["https://www.google.com/"])
+        , ("<XF86HomePage>", spawn myBrowser)
+        , ("<XF86Search>", safeSpawn myBrowser ["https://www.duckduckgo.com/"])
         , ("<XF86Eject>", spawn "toggleeject")
         , ("<Print>", spawn "scrotd 0")
         ]
@@ -528,13 +526,13 @@ main = do
         , focusedBorderColor = myFocusColor
         , logHook = workspaceHistoryHook <+> myLogHook <+> dynamicLogWithPP xmobarPP
                         { ppOutput = \x -> hPutStrLn xmproc x
-                        , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
+                        , ppCurrent = xmobarColor "#c3e88d" "" . wrap "" "" -- Current workspace in xmobar
                         , ppVisible = xmobarColor "#c3e88d" ""                -- Visible but not current workspace
                         , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
                         , ppHiddenNoWindows = xmobarColor "#c792ea" ""        -- Hidden workspaces (no windows)
-                        , ppTitle = xmobarColor "#b3afc2" "" . shorten 60     -- Title of active window in xmobar
+                        , ppTitle = xmobarColor "#b3afc2" "" . shorten 120    -- Title of active window in xmobar
                         , ppSep =  "<fc=#666666> <fn=2>|</fn> </fc>"          -- Separators in xmobar
-                        , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"  -- Urgent workspace
+                        , ppUrgent = xmobarColor "#C45500" "" . wrap "" "!"  -- Urgent workspace
                         , ppExtras  = [windowCount]                           -- # of windows current workspace
                         , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
                         }
