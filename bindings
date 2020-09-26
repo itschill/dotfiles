@@ -5,6 +5,7 @@ gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
 nvim/vimrc ~/.vimrc
 redshift/redshift.conf ~/.config/redshift/redshift.conf
 x/Xresources ~/.Xresources
+x/xsession ~/.xsession
 xmobar/xmobarrc ~/.xmobarrc
 xmonad/xmonad.hs ~/.xmonad/xmonad.hs
 xmonad/xmonadctl.hs ~/.xmonad/xmonadctl.hs
