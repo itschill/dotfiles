@@ -17,9 +17,8 @@ while read -r file destination; do
 
     if [ -e $filepath ]; then
         echo "Binding $link to file $filepath"
+        ln -sfn "$filepath" $(eval echo "$link")
     else
         echo "File $filepath does not exist, ignoring"
     fi
-
-    ln -sfn "$filepath" $(eval echo "$link")
 done < $bindings
