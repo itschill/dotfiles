@@ -28,7 +28,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 36000
 
                                 -- disk free space monitor
-                                , Run DiskU [("/", "<fc=#e0ffff> <free></fc>")]
+                                , Run DiskU [("/", "<fc=#a9a9a9> <free></fc>")]
                                                      [ "--Low"      , "20"
                                                      , "--High"     , "50"
                                                      , "-m"         , "1"
