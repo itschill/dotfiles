@@ -31,9 +31,6 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                 , Run DiskU [("/", "<fc=#e0ffff> <free></fc>")]
                                                      [ "--Low"      , "20"
                                                      , "--High"     , "50"
-                                                     , "--low"      , "lightgreen"
-                                                     , "--normal"   , "lightorange"
-                                                     , "--high"     , "lightred"
                                                      , "-m"         , "1"
                                                      , "-p"         , "3"
                                                      ] 60
