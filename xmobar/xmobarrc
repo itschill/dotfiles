@@ -40,7 +40,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      , "--Low"      , "1000"       -- units: B/s
                                                      , "--High"     , "5000"       -- units: B/s
                                                      , "--low"      , "lightgreen"
-                                                     , "--normal"   , "lightorange"
+                                                     , "--normal"   , "orange"
                                                      , "--high"     , "lightred"
                                                      ] 10
 
@@ -49,7 +49,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      , "--Low"      , "50"         -- units: %
                                                      , "--High"     , "85"         -- units: %
                                                      , "--low"      , "lightgreen"
-                                                     , "--normal"   , "lightorange"
+                                                     , "--normal"   , "orange"
                                                      , "--high"     , "lightred"
                                                      ] 10
 
@@ -58,7 +58,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      , "--Low"      , "60"        -- units: °C
                                                      , "--High"     , "80"        -- units: °C
                                                      , "--low"      , "lightgreen"
-                                                     , "--normal"   , "lightorange"
+                                                     , "--normal"   , "orange"
                                                      , "--high"     , "lightred"
                                                      ] 50
 
@@ -67,7 +67,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      , "--Low"      , "20"        -- units: %
                                                      , "--High"     , "90"        -- units: %
                                                      , "--low"      , "lightgreen"
-                                                     , "--normal"   , "lightorange"
+                                                     , "--normal"   , "orange"
                                                      , "--high"     , "lightred"
                                                      ] 10
 
@@ -76,12 +76,12 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      , "--Low"      , "15"        -- units: %
                                                      , "--High"     , "80"        -- units: %
                                                      , "--low"      , "lightred"
-                                                     , "--normal"   , "lightorange"
+                                                     , "--normal"   , "orange"
                                                      , "--high"     , "lightgreen"
 
                                                      , "--" -- battery specific options
                                                                -- discharging status
-                                                               , "-o"   , "<left>% <timeleft>"
+                                                               , "-o"   , "<left>% <fc=#00dddd><timeleft></fc>"
                                                                -- AC "on" status
                                                                , "-O"   , "<fc=#fdfd96>Charging</fc>"
                                                                -- charged status
