@@ -24,11 +24,11 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                   Run UnsafeStdinReader
 
                                 -- weather monitor
-                                , Run Weather "LPPT" [ "--template", "<fc=#B3AFC2> <skyCondition></fc> <fc=#B3AFC2> <fc=#4682B4><tempC></fc>°C</fc> <fc=#B3AFC2> <fc=#4682B4><rh></fc>%</fc>"
+                                , Run Weather "LPPT" [ "--template", "<fc=#fffafa> <skyCondition></fc> <fc=#ffa500> <tempC>°C</fc> <fc=#add8e6> <rh>%</fc>"
                                                      ] 36000
 
                                 -- disk free space monitor
-                                , Run DiskU [("/", "<fc=#82AAFF> <free></fc>")]
+                                , Run DiskU [("/", "<fc=#e0ffff> <free></fc>")]
                                                      [ "--Low"      , "20"
                                                      , "--High"     , "50"
                                                      , "--low"      , "lightgreen"
@@ -39,7 +39,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 60
 
                                 -- network activity monitor (dynamic interface resolution)
-                                , Run DynNetwork     [ "--template" , "<fc=#44ff44> <tx>kB/s  <rx>kB/s</fc>"
+                                , Run DynNetwork     [ "--template" , "<fc=#0892d0> <tx>kB/s  <rx>kB/s</fc>"
                                                      , "--Low"      , "1000"       -- units: B/s
                                                      , "--High"     , "5000"       -- units: B/s
                                                      , "--low"      , "lightgreen"
@@ -48,7 +48,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 10
 
                                 -- cpu activity monitor
-                                , Run MultiCpu       [ "--template" , "<fc=#FFB86C> <total0>%</fc>"
+                                , Run MultiCpu       [ "--template" , "<fc=#ffb86c> <total0>%</fc>"
                                                      , "--Low"      , "50"         -- units: %
                                                      , "--High"     , "85"         -- units: %
                                                      , "--low"      , "lightgreen"
@@ -57,7 +57,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 10
 
                                 -- cpu core temperature monitor
-                                , Run CoreTemp       [ "--template" , "<fc=#ff3311> <core0>°C</fc>"
+                                , Run CoreTemp       [ "--template" , "<fc=#dc143c> <core0>°C</fc>"
                                                      , "--Low"      , "60"        -- units: °C
                                                      , "--High"     , "80"        -- units: °C
                                                      , "--low"      , "lightgreen"
@@ -66,7 +66,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 50
 
                                 -- memory usage monitor
-                                , Run Memory         [ "--template" ,"<fc=#FF5555> <usedratio>%</fc>"
+                                , Run Memory         [ "--template" ,"<fc=#0080ff> <usedratio>%</fc>"
                                                      , "--Low"      , "20"        -- units: %
                                                      , "--High"     , "90"        -- units: %
                                                      , "--low"      , "lightgreen"
@@ -75,7 +75,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 10
 
                                 -- battery monitor
-                                , Run Battery        [ "--template" , "<fc=#EEEEEE>  <acstatus></fc>"
+                                , Run Battery        [ "--template" , "<fc=#bfff00>  <acstatus></fc>"
                                                      , "--Low"      , "15"        -- units: %
                                                      , "--High"     , "80"        -- units: %
                                                      , "--low"      , "lightred"
@@ -83,17 +83,17 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      , "--high"     , "lightgreen"
 
                                                      , "--" -- battery specific options
-                                                               -- discharging status
-                                                               , "-o", "<left>% (<timeleft>)"
-                                                               -- AC "on" status
-                                                               , "-O", "<fc=#dAA520>Charging</fc>"
-                                                               -- charged status
-                                                               , "-i", "<fc=#006000>Charged</fc>"
+                                                     -- discharging status
+                                                     , "-o"         , "<left>% <timeleft>"
+                                                     -- AC "on" status
+                                                     , "-O"         , "<fc=#fdfd96>Charging</fc>"
+                                                     -- charged status
+                                                     , "-i"         , "<fc=#bfff00>Charged</fc>"
                                                      ] 50
 
                                 -- time and date indicator
                                 --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
-                                , Run Date           "<fc=#8BE9FD>  %a %F %R</fc>" "date" 10
+                                , Run Date           "<fc=#ffd700>  %a %F %R</fc>" "date" 10
 
                                 -- keyboard layout indicator
                                 , Run Kbd            [ ("gb" , "<fc=#777777> GB</fc>")
