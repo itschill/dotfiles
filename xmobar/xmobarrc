@@ -80,12 +80,12 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      , "--high"     , "lightgreen"
 
                                                      , "--" -- battery specific options
-                                                     -- discharging status
-                                                     , "-o"         , "<left>% <timeleft>"
-                                                     -- AC "on" status
-                                                     , "-O"         , "<fc=#fdfd96>Charging</fc>"
-                                                     -- charged status
-                                                     , "-i"         , "<fc=#bfff00>Charged</fc>"
+                                                               -- discharging status
+                                                               , "-o"   , "<left>% <timeleft>"
+                                                               -- AC "on" status
+                                                               , "-O"   , "<fc=#fdfd96>Charging</fc>"
+                                                               -- charged status
+                                                               , "-i"   , "<fc=#bfff00>Charged</fc>"
                                                      ] 50
 
                                 -- time and date indicator
