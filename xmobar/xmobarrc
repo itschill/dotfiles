@@ -24,15 +24,18 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                   Run UnsafeStdinReader
 
                                 -- weather monitor
-                                , Run Weather "LPPT" [ "--template", "<fc=#B3AFC2> <skyCondition>  <fc=#4682B4><tempC></fc>°C  <fc=#4682B4><rh></fc>%</fc>"
+                                , Run Weather "LPPT" [ "--template", "<fc=#B3AFC2> <skyCondition></fc> <fc=#B3AFC2> <fc=#4682B4><tempC></fc>°C</fc> <fc=#B3AFC2> <fc=#4682B4><rh></fc>%</fc>"
                                                      ] 36000
 
                                 -- disk free space monitor
                                 , Run DiskU [("/", "<fc=#82AAFF> <free></fc>")]
-                                                     [ "--Low", "20"
-                                                     , "--High", "50"
-                                                     , "-m", "1"
-                                                     , "-p", "3"
+                                                     [ "--Low"      , "20"
+                                                     , "--High"     , "50"
+                                                     , "--low"      , "lightgreen"
+                                                     , "--normal"   , "lightorange"
+                                                     , "--high"     , "lightred"
+                                                     , "-m"         , "1"
+                                                     , "-p"         , "3"
                                                      ] 60
 
                                 -- network activity monitor (dynamic interface resolution)
