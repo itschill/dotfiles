@@ -75,28 +75,31 @@ myFont :: String
 myFont = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixelsize=22:antialias=true:hinting=true"
 
 myModMask :: KeyMask
-myModMask = mod4Mask       -- Sets modkey to super/windows key
+myModMask = mod4Mask
 
 myTerminal :: String
-myTerminal = "alacritty"   -- Sets default terminal
+myTerminal = "alacritty"
 
 myBrowser :: String
-myBrowser = "firefox"      -- Sets firefox as browser for tree select
+myBrowser = "firefox"
 
 myEditor :: String
-myEditor = "nvim"          -- Sets nvim as editor for tree select
+myEditor = "nvim"
 
 myBorderWidth :: Dimension
-myBorderWidth = 2          -- Sets border width for windows
+myBorderWidth = 2
 
 myNormColor :: String
-myNormColor   = "#81a2be"  -- Border color of normal windows
+myNormColor   = "#81a2be"
 
 myFocusColor :: String
-myFocusColor  = "#e6c547"  -- Border color of focused windows
+myFocusColor  = "#e6c547"
 
 altMask :: KeyMask
-altMask = mod1Mask         -- Setting this for use in xprompts
+altMask = mod1Mask
+
+lockScreen :: String
+lockScreen = "xsecurelock"
 
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
@@ -369,11 +372,11 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  ||| magnify
                                  ||| noBorders monocle
                                  ||| floats
-                                 -- ||| grid
+                                 ||| grid
                                  ||| noBorders tabs
-                                 -- ||| spirals
-                                 -- ||| threeCol
-                                 -- ||| threeRow
+                                 ||| spirals
+                                 ||| threeCol
+                                 ||| threeRow
 
 xmobarEscape :: String -> String
 xmobarEscape = concatMap doubleLts
@@ -415,6 +418,9 @@ myKeys =
 
     -- Run Prompt
         , ("M-S-<Return>", shellPrompt myXPConfig)   -- Shell Prompt
+
+    -- Lock screen
+        , ("M-S-l", spawn lockScreen)
 
     -- Windows
         , ("M-S-c", kill1)                           -- Kill the currently focused client
