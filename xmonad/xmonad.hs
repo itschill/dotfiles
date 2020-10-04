@@ -184,21 +184,19 @@ myXPConfig :: XPConfig
 myXPConfig = def
       { font                = myFont
       , bgColor             = "#1d1f21"
-      , fgColor             = "#81a2be"
-      , bgHLight            = "#81a2be"
+      , fgColor             = "#ffbf00"
+      , bgHLight            = "#ffbf00"
       , fgHLight            = "#1d1f21"
       , borderColor         = "#1d1f21"
       , promptBorderWidth   = 0
       , promptKeymap        = myXPKeymap
       , position            = Top
---    , position            = CenteredAt { xpCenterY = 0.3, xpWidth = 0.3 }
-      , height              = 20
+      , height              = 48
       , historySize         = 256
       , historyFilter       = id
       , defaultText         = []
       , autoComplete        = Just 100000  -- set Just 100000 for .1 sec
       , showCompletionOnTab = False
-      -- , searchPredicate     = isPrefixOf
       , searchPredicate     = fuzzyMatch
       , alwaysHighlight     = True
       , maxComplRows        = Nothing      -- set to Just 5 for 5 rows
@@ -222,17 +220,9 @@ promptList = [ ("m", manPrompt)          -- manpages prompt
              , ("x", xmonadPrompt)       -- xmonad prompt
              ]
 
--- Same as the above list except this is for my custom prompts.
+-- Same as the above list except this is for custom prompts.
 promptList' :: [(String, XPConfig -> String -> X (), String)]
-promptList' = [ ("c", calcPrompt, "qalc")         -- requires qalculate-gtk
-              ]
-
-calcPrompt c ans =
-    inputPrompt c (trim ans) ?+ \input ->
-        liftIO(runProcessWithInput "qalc" [input] "") >>= calcPrompt c
-    where
-        trim  = f . f
-            where f = reverse . dropWhile isSpace
+promptList' = []
 
 myXPKeymap :: M.Map (KeyMask,KeySym) (XP ())
 myXPKeymap = M.fromList $
@@ -525,16 +515,16 @@ main = do
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor
         , logHook = workspaceHistoryHook <+> myLogHook <+> dynamicLogWithPP xmobarPP
-                        { ppOutput = \x -> hPutStrLn xmproc x
-                        , ppCurrent = xmobarColor "#c3e88d" "" . wrap "" "" -- Current workspace in xmobar
-                        , ppVisible = xmobarColor "#c3e88d" ""                -- Visible but not current workspace
-                        , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" ""   -- Hidden workspaces in xmobar
-                        , ppHiddenNoWindows = xmobarColor "#c792ea" ""        -- Hidden workspaces (no windows)
-                        , ppTitle = xmobarColor "#b3afc2" "" . shorten 120    -- Title of active window in xmobar
-                        , ppSep =  "<fc=#666666> <fn=2>|</fn> </fc>"          -- Separators in xmobar
-                        , ppUrgent = xmobarColor "#C45500" "" . wrap "" "!"  -- Urgent workspace
-                        , ppExtras  = [windowCount]                           -- # of windows current workspace
-                        , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+                        { ppOutput          = \x -> hPutStrLn xmproc x
+                        , ppCurrent         = xmobarColor "#ffa700" ""
+                        , ppVisible         = xmobarColor "#ff8c00" ""
+                        , ppHidden          = xmobarColor "#00bfff" ""
+                        , ppHiddenNoWindows = xmobarColor "#007fff" ""
+                        , ppUrgent          = xmobarColor "#ff003f" "" . wrap "" "!"
+                        , ppTitle           = xmobarColor "#eee8aa" "" . shorten 120
+                        , ppSep             = "<fc=#666666> <fn=2>|</fn> </fc>"
+                        , ppExtras          = [windowCount]
+                        , ppOrder           = \(ws:l:t:ex) -> [ws,l]++ex++[t]
                         }
         } `additionalKeysP` myKeys
 

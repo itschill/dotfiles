@@ -9,7 +9,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                 , "xft:FontAwesome:pixelsize=16:antialias=true:hinting=true"
                                 ]
        , bgColor            = "#1d1f21"
-       , fgColor            = "#81a2be"
+       , fgColor            = "#4169e1"
        , position           = Static { xpos = 0 , ypos = 0, width = 3840, height = 48 }
        , lowerOnStart       = True
        , hideOnStart        = False
@@ -18,7 +18,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
        , iconRoot           = "~/.xmonad/xpm/"  -- default: "."
        , sepChar            = "%"
        , alignSep           = "}{"
-       , template           = "  λ  %UnsafeStdinReader% }{ %LPPT% <fc=#666666>|</fc> %kbd% <fc=#666666>|</fc> %dynnetwork% <fc=#666666>|</fc> %multicpu% <fc=#666666>|</fc> %memory% <fc=#666666>|</fc> %coretemp% <fc=#666666>|</fc> %disku% <fc=#666666>|</fc> %battery% <fc=#666666>|</fc> %date% "
+       , template           = "  %UnsafeStdinReader% }{ %LPPT% <fc=#666666>|</fc> %kbd% <fc=#666666>|</fc> %dynnetwork% <fc=#666666>|</fc> %multicpu% <fc=#666666>|</fc> %memory% <fc=#666666>|</fc> %coretemp% <fc=#666666>|</fc> %disku% <fc=#666666>|</fc> %battery% <fc=#666666>|</fc> %date% "
        , commands           = [
                                 -- Prints out the left side items such as workspaces, layout, etc.
                                   Run UnsafeStdinReader
@@ -28,7 +28,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 36000
 
                                 -- disk free space monitor
-                                , Run DiskU [("/", "<fc=#a9a9a9> <free></fc>")]
+                                , Run DiskU [("/", "<fc=#778899> <free></fc>")]
                                                      [ "--Low"      , "20"
                                                      , "--High"     , "50"
                                                      , "-m"         , "1"
@@ -54,7 +54,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                                      ] 10
 
                                 -- cpu core temperature monitor
-                                , Run CoreTemp       [ "--template" , "<fc=#dc143c> <core0>°C</fc>"
+                                , Run CoreTemp       [ "--template" , "<fc=#b22222> <core0>°C</fc>"
                                                      , "--Low"      , "60"        -- units: °C
                                                      , "--High"     , "80"        -- units: °C
                                                      , "--low"      , "lightgreen"
