@@ -10,7 +10,7 @@ Config { font               = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixels
                                 ]
        , bgColor            = "#1d1f21"
        , fgColor            = "#4169e1"
-       , position           = Static { xpos = 0 , ypos = 0, width = 3840, height = 48 }
+       , position           = TopSize L 100 40
        , lowerOnStart       = True
        , hideOnStart        = False
        , allDesktops        = True

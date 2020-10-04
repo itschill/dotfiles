@@ -500,7 +500,8 @@ myKeys =
 main :: IO ()
 main = do
     -- Launching xmobar.
-    xmproc <- spawnPipe "xmobar -x 0 /home/cool/.xmobarrc"
+    xmproc0 <- spawnPipe "xmobar -x 0 /home/cool/.xmobarrc"
+    xmproc1 <- spawnPipe "xmobar -x 1 /home/cool/.xmobarrc"
     -- Launch xmonad.
     xmonad $ ewmh def
         { manageHook = ( isFullscreen --> doFullFloat ) <+> myManageHook <+> manageDocks
@@ -521,7 +522,7 @@ main = do
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor
         , logHook = workspaceHistoryHook <+> myLogHook <+> dynamicLogWithPP xmobarPP
-                        { ppOutput          = \x -> hPutStrLn xmproc x
+                        { ppOutput          = \x -> hPutStrLn xmproc0 x >> hPutStrLn xmproc1 x
                         , ppCurrent         = xmobarColor "#ffa700" ""
                         , ppVisible         = xmobarColor "#ff8c00" ""
                         , ppHidden          = xmobarColor "#00bfff" ""
