@@ -70,7 +70,13 @@ set listchars=tab:̣⭾,nbsp:␣,trail:·
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-Plug 'nanotech/jellybeans.vim'                          " Jellybeans theme
+" Themes
+Plug 'nanotech/jellybeans.vim'
+Plug 'morhetz/gruvbox'
+Plug 'junegunn/seoul256.vim'
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'sainnhe/forest-night'
+Plug 'cocopon/iceberg.vim'
 
 Plug 'tpope/vim-fugitive'                               " Git wrapper
 Plug 'airblade/vim-gitgutter'                           " Git diff markers
@@ -115,7 +121,12 @@ Plug 'eagletmt/neco-ghc'                                " Haskell language suppo
 " Initialize plugin system
 call plug#end()
 
-colorscheme jellybeans " Use jellybean color scheme
+set termguicolors
+let g:seoul256_background         = 233     " Use darkset background on seoul256 theme
+let g:tokyonight_style            = 'night' " Dark tokyonight theme
+let g:tokyonight_enable_italic    = 1
+let g:jellybeans_use_term_italics = 1
+colorscheme jellybeans
 
 " Enable filesystem side bar
 autocmd vimenter * NERDTree | wincmd p
