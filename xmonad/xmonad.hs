@@ -385,21 +385,13 @@ xmobarEscape = concatMap doubleLts
         doubleLts x   = [x]
 
 myWorkspaces :: [String]
-myWorkspaces = clickable . (map xmobarEscape)
-               $ ["\61728", "\62472", "\62057", "\61557", "\61761", "\61441", "\61448"]
-  where
-        clickable l = [ "<action=xdotool key super+" ++ show (n) ++ "> " ++ ws ++ " </action>" |
-                      (i,ws) <- zip [1..9] l,
-                      let n = i ]
+myWorkspaces = map xmobarEscape ["\61728", "\62472", "\62057", "\61557", "\61761", "\61441", "\61448"]
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
-     -- using 'doShift ( myWorkspaces !! 7)' sends program to workspace 8!
-     -- I'm doing it this way because otherwise I would have to write out
-     -- the full name of my workspaces.
-     [ title =? "firefox"     --> doShift ( myWorkspaces !! 2 )
-     , className =? "vlc"     --> doShift ( myWorkspaces !! 7 )
-     , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
+     [ title =? myBrowser     --> doShift ( myWorkspaces !! 2 )
+     , className =? "vlc"     --> doShift ( myWorkspaces !! 6 )
+     , (className =? myBrowser <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
 
 myLogHook :: X ()
