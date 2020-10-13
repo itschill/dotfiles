@@ -4,7 +4,7 @@ filetype plugin indent on
 "
 " General
 "
-let mapleader=","   " Remap leader to ,
+let mapleader=" "   " Remap leader to space
 syntax on           " Enable syntax highlighting
 set encoding=UTF-8  " Use UTF-8 encoding
 set mouse=a         " Enable mouse support
