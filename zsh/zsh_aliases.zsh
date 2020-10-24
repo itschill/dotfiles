@@ -190,7 +190,7 @@ str-join () {
 }
 
 find-jars () {
-	local classname="$1"
+    local classname="$1"
     local location="${2:-.}"
 
     find "$location" -name '*.jar' -exec grep -Hls "$classname" {} \;
