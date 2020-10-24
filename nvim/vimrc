@@ -61,8 +61,8 @@ set nowritebackup   " No backup before overwriting a file
 "
 " Line handling
 "
-set nowrap  " Don't wrap lines
-set list    " Higlight bad characters
+set wrap " Wrap lines
+set list " Higlight bad characters
 set listchars=tab:̣⭾,nbsp:␣,trail:·
 
 " Plugins
