@@ -10,7 +10,6 @@ import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScre
 import XMonad.Actions.MouseResize
 import XMonad.Actions.Promote
 import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
-import qualified XMonad.Actions.TreeSelect as TS
 import XMonad.Actions.WindowGo (runOrRaise)
 import XMonad.Actions.WithAll (sinkAll, killAll)
 import qualified XMonad.Actions.Search as S
@@ -107,82 +106,6 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 myStartupHook :: X ()
 myStartupHook = return ()
 
-treeselectAction :: TS.TSConfig (X ()) -> X ()
-treeselectAction a = TS.treeselectAction a
-   [ Node (TS.TSNode "+ Accessories" "Accessory applications" (return ()))
-       [ Node (TS.TSNode "Archive Manager" "Tool for archived packages" (spawn "file-roller")) []
-       , Node (TS.TSNode "Calibre" "Manages books on my ereader" (spawn "calibre")) []
-       ]
-   , Node (TS.TSNode "+ Internet" "internet and web programs" (return ()))
-       [ Node (TS.TSNode "Discord" "Chat and video chat platform" (spawn "discord")) []
-       , Node (TS.TSNode "Firefox" "Open source web browser" (spawn myBrowser)) []
-       , Node (TS.TSNode "Thunderbird" "Open source email client" (spawn "thunderbird")) []
-       ]
-   , Node (TS.TSNode "------------------------" "" (spawn "xdotool key Escape")) []
-   , Node (TS.TSNode "+ Bookmarks" "a list of web bookmarks" (return ()))
-       [ Node (TS.TSNode "+ Linux" "a list of web bookmarks" (return ()))
-           [ Node (TS.TSNode "+ Arch Linux" "btw, i use arch!" (return ()))
-               [ Node (TS.TSNode "Arch Linux" "Arch Linux homepage" (spawn (myBrowser ++ "https://www.archlinux.org/"))) []
-               , Node (TS.TSNode "Arch Wiki" "The best Linux wiki" (spawn (myBrowser ++ "https://wiki.archlinux.org/"))) []
-               , Node (TS.TSNode "AUR" "Arch User Repository" (spawn (myBrowser ++ "https://aur.archlinux.org/"))) []
-               , Node (TS.TSNode "Arch Forums" "Arch Linux web forum" (spawn (myBrowser ++ "https://bbs.archlinux.org/"))) []
-               ]
-           , Node (TS.TSNode "+ Window Managers" "window manager documentation" (return ()))
-               [ Node (TS.TSNode "+ XMonad" "xmonad documentation" (return ()))
-                   [ Node (TS.TSNode "XMonad" "Homepage for XMonad" (spawn (myBrowser ++ "http://xmonad.org"))) []
-                   , Node (TS.TSNode "XMonad GitHub" "The GitHub page for XMonad" (spawn (myBrowser ++ "https://github.com/xmonad/xmonad"))) []
-                   , Node (TS.TSNode "xmonad-contrib" "Third party extensions for XMonad" (spawn (myBrowser ++ "https://hackage.haskell.org/package/xmonad-contrib"))) []
-                   , Node (TS.TSNode "xmonad-ontrib GitHub" "The GitHub page for xmonad-contrib" (spawn (myBrowser ++ "https://github.com/xmonad/xmonad-contrib"))) []
-                   , Node (TS.TSNode "Xmobar" "Minimal text-based status bar"  (spawn (myBrowser ++ "https://hackage.haskell.org/package/xmobar"))) []
-                   ]
-               ]
-           ]
-       , Node (TS.TSNode "+ Search and Reference" "Search engines, indices and wikis" (return ()))
-           [ Node (TS.TSNode "DuckDuckGo" "Privacy-oriented search engine" (spawn (myBrowser ++ "https://duckduckgo.com/"))) []
-           , Node (TS.TSNode "Thesaurus" "Lookup synonyms and antonyms" (spawn (myBrowser ++ "https://www.thesaurus.com/"))) []
-           , Node (TS.TSNode "Wikipedia" "The free encyclopedia" (spawn (myBrowser ++ "https://www.wikipedia.org/"))) []
-           ]
-       , Node (TS.TSNode "+ Programming" "programming and scripting" (return ()))
-         [ Node (TS.TSNode "+ Haskell" "haskell documentation" (return ()))
-             [ Node (TS.TSNode "Haskell.org" "Homepage for haskell" (spawn (myBrowser ++ "http://www.haskell.org"))) []
-             , Node (TS.TSNode "Hoogle" "Haskell API search engine" (spawn "https://hoogle.haskell.org/")) []
-             ]
-         ]
-       ]
-   ]
-
-tsDefaultConfig :: TS.TSConfig a
-tsDefaultConfig = TS.TSConfig { TS.ts_hidechildren = True
-                              , TS.ts_background   = 0xdd292d3e
-                              , TS.ts_font         = myFont
-                              , TS.ts_node         = (0xffd0d0d0, 0xff202331)
-                              , TS.ts_nodealt      = (0xffd0d0d0, 0xff292d3e)
-                              , TS.ts_highlight    = (0xffffffff, 0xff755999)
-                              , TS.ts_extra        = 0xffd0d0d0
-                              , TS.ts_node_width   = 200
-                              , TS.ts_node_height  = 20
-                              , TS.ts_originX      = 0
-                              , TS.ts_originY      = 0
-                              , TS.ts_indent       = 80
-                              , TS.ts_navigate     = myTreeNavigation
-                              }
-
-myTreeNavigation = M.fromList
-    [ ((0, xK_Escape),   TS.cancel)
-    , ((0, xK_Return),   TS.select)
-    , ((0, xK_space),    TS.select)
-    , ((0, xK_Up),       TS.movePrev)
-    , ((0, xK_Down),     TS.moveNext)
-    , ((0, xK_Left),     TS.moveParent)
-    , ((0, xK_Right),    TS.moveChild)
-    , ((0, xK_k),        TS.movePrev)
-    , ((0, xK_j),        TS.moveNext)
-    , ((0, xK_h),        TS.moveParent)
-    , ((0, xK_l),        TS.moveChild)
-    , ((0, xK_o),        TS.moveHistBack)
-    , ((0, xK_i),        TS.moveHistForward)
-    ]
-
 myXPConfig :: XPConfig
 myXPConfig = def
       { font                = myFont
@@ -198,11 +121,11 @@ myXPConfig = def
       , historySize         = 256
       , historyFilter       = id
       , defaultText         = []
-      , autoComplete        = Just 100000  -- set Just 100000 for .1 sec
+      , autoComplete        = Just 100000  -- 100 ms
       , showCompletionOnTab = False
       , searchPredicate     = fuzzyMatch
       , alwaysHighlight     = True
-      , maxComplRows        = Nothing      -- set to Just 5 for 5 rows
+      , maxComplRows        = Nothing
       }
 
 -- The same config above minus the autocomplete feature which is annoying
@@ -275,7 +198,6 @@ archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?searc
 searchList :: [(String, S.SearchEngine)]
 searchList = [ ("a", archwiki)
              , ("d", S.duckduckgo)
-             , ("g", S.google)
              , ("h", S.hoogle)
              , ("i", S.images)
              , ("s", S.stackage)
@@ -337,13 +259,9 @@ threeCol = renamed [Replace "threeCol"]
 threeRow = renamed [Replace "threeRow"]
            $ limitWindows 7
            $ mySpacing' 12
-           -- Mirror takes a layout and rotates it by 90 degrees.
-           -- So we are applying Mirror to the ThreeCol layout.
            $ Mirror
            $ ThreeCol 1 (3/100) (1/2)
 tabs     = renamed [Replace "tabs"]
-           -- I cannot add spacing to this layout because it will
-           -- add spacing between window and tabs which looks bad.
            $ tabbed shrinkText myTabConfig
   where
     myTabConfig = def { fontName            = myFont
@@ -401,15 +319,13 @@ myLogHook = fadeInactiveLogHook fadeAmount
 myKeys :: [(String, X ())]
 myKeys =
     -- Xmonad
-        [ ("M-C-r", spawn "xmonad --recompile")      -- Recompiles xmonad
-        , ("M-S-r", spawn "xmonad --restart")        -- Restarts xmonad
-        , ("M-S-q", io exitSuccess)                  -- Quits xmonad
+        [ ("M-C-r", spawn "xmonad --recompile")
+        , ("M-S-r", spawn "xmonad --restart")
+        , ("M-S-q", io exitSuccess)
 
-    -- Open my preferred terminal
+    -- Shell
         , ("M-<Return>", spawn myTerminal)
-
-    -- Run Prompt
-        , ("M-S-<Return>", shellPrompt myXPConfig)   -- Shell Prompt
+        , ("M-S-<Return>", shellPrompt myXPConfig)
 
     -- Lock screen
         , ("M-S-l", spawn lockScreen)
@@ -423,20 +339,15 @@ myKeys =
         , ("M-<Delete>", withFocused $ windows . W.sink) -- Push floating window back to tile
         , ("M-S-<Delete>", sinkAll)                      -- Push ALL floating windows to tile
 
-    -- Tree Select/
-        , ("C-t t", treeselectAction tsDefaultConfig)
-
     -- Windows navigation
         , ("M-m", windows W.focusMaster)     -- Move focus to the master window
         , ("M-j", windows W.focusDown)       -- Move focus to the next window
         , ("M-k", windows W.focusUp)         -- Move focus to the prev window
-        --, ("M-S-m", windows W.swapMaster)    -- Swap the focused window and the master window
         , ("M-S-j", windows W.swapDown)      -- Swap focused window with next window
         , ("M-S-k", windows W.swapUp)        -- Swap focused window with prev window
         , ("M-<Backspace>", promote)         -- Moves focused window to master, others maintain order
         , ("M1-S-<Tab>", rotSlavesDown)      -- Rotate all windows except master and keep focus in place
         , ("M1-C-<Tab>", rotAllDown)         -- Rotate all the windows in the current stack
-        --, ("M-S-s", windows copyToAll)
         , ("M-C-s", killAllOtherCopies)
 
         -- Layouts
@@ -491,16 +402,12 @@ myKeys =
 
 main :: IO ()
 main = do
-    -- Launching xmobar.
+    -- Launching xmobar
     xmproc0 <- spawnPipe "xmobar -x 0 /home/cool/.xmobarrc"
     xmproc1 <- spawnPipe "xmobar -x 1 /home/cool/.xmobarrc"
-    -- Launch xmonad.
+    -- Launch xmonad
     xmonad $ ewmh def
         { manageHook = ( isFullscreen --> doFullFloat ) <+> myManageHook <+> manageDocks
-        -- Run xmonad commands from command line with "xmonadctl command". Commands include:
-        -- shrink, expand, next-layout, default-layout, restart-wm, xterm, kill, refresh, run,
-        -- focus-up, focus-down, swap-up, swap-down, swap-master, sink, quit-wm. You can run
-        -- "xmonadctl 0" to generate full list of commands written to ~/.xsession-errors.
         , handleEventHook    = serverModeEventHookCmd
                                <+> serverModeEventHook
                                <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn)
