@@ -6,30 +6,25 @@ import qualified XMonad.StackSet as W
 
     -- Actions
 import XMonad.Actions.CopyWindow (kill1, killAllOtherCopies)
-import XMonad.Actions.CycleWS (moveTo, shiftTo, WSType(..), nextScreen, prevScreen)
+import XMonad.Actions.CycleWS (WSType(..), nextScreen, prevScreen)
 import XMonad.Actions.MouseResize
 import XMonad.Actions.Promote
 import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
-import XMonad.Actions.WindowGo (runOrRaise)
 import XMonad.Actions.WithAll (sinkAll, killAll)
 import qualified XMonad.Actions.Search as S
 
     -- Data
-import Data.Char (isSpace)
 import Data.Monoid
 import Data.Maybe (isJust)
-import Data.Tree
 import qualified Data.Map as M
 
     -- Hooks
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
-import XMonad.Hooks.EwmhDesktops  -- for some fullscreen events, also for xcomposite in obs.
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat)
-import XMonad.Hooks.ServerMode
-import XMonad.Hooks.SetWMName
-import XMonad.Hooks.WorkspaceHistory
+import XMonad.Hooks.WorkspaceHistory (workspaceHistoryHook)
 
     -- Layouts
 import XMonad.Layout.GridVariants (Grid(Grid))
@@ -47,7 +42,6 @@ import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
 import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed (renamed, Rename(Replace))
-import XMonad.Layout.ShowWName
 import XMonad.Layout.Spacing
 import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
 import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(Toggle))
@@ -55,20 +49,14 @@ import qualified XMonad.Layout.MultiToggle as MT (Toggle(..))
 
     -- Prompt
 import XMonad.Prompt
-import XMonad.Prompt.Input
 import XMonad.Prompt.FuzzyMatch
-import XMonad.Prompt.Man
-import XMonad.Prompt.Pass
 import XMonad.Prompt.Shell (shellPrompt)
-import XMonad.Prompt.Ssh
-import XMonad.Prompt.XMonad
 import Control.Arrow (first)
 
     -- Utilities
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.NamedScratchpad
-import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
-import XMonad.Util.SpawnOnce
+import XMonad.Util.Run (safeSpawn, spawnPipe)
 
 myFont :: String
 myFont = "xft:DejaVu Sans Mono Nerd Font:weight=bold:pixelsize=22:antialias=true:hinting=true"
@@ -128,27 +116,10 @@ myXPConfig = def
       , maxComplRows        = Nothing
       }
 
--- The same config above minus the autocomplete feature which is annoying
--- on certain Xprompts, like the search engine prompts.
 myXPConfig' :: XPConfig
 myXPConfig' = myXPConfig
       { autoComplete        = Nothing
       }
-
--- A list of all of the standard Xmonad prompts and a key press assigned to them.
--- These are used in conjunction with keybinding I set later in the config.
-promptList :: [(String, XPConfig -> X ())]
-promptList = [ ("m", manPrompt)          -- manpages prompt
-             , ("p", passPrompt)         -- get passwords (requires 'pass')
-             , ("g", passGeneratePrompt) -- generate passwords (requires 'pass')
-             , ("r", passRemovePrompt)   -- remove passwords (requires 'pass')
-             , ("s", sshPrompt)          -- ssh prompt
-             , ("x", xmonadPrompt)       -- xmonad prompt
-             ]
-
--- Same as the above list except this is for custom prompts.
-promptList' :: [(String, XPConfig -> String -> X (), String)]
-promptList' = []
 
 myXPKeymap :: M.Map (KeyMask,KeySym) (XP ())
 myXPKeymap = M.fromList $
@@ -193,20 +164,12 @@ archwiki :: S.SearchEngine
 
 archwiki = S.searchEngine "archwiki" "https://wiki.archlinux.org/index.php?search="
 
--- This is the list of search engines that I want to use. Some are from
--- XMonad.Actions.Search, and some are the ones that I added above.
 searchList :: [(String, S.SearchEngine)]
 searchList = [ ("a", archwiki)
              , ("d", S.duckduckgo)
              , ("h", S.hoogle)
-             , ("i", S.images)
              , ("s", S.stackage)
-             , ("t", S.thesaurus)
-             , ("v", S.vocabulary)
-             , ("b", S.wayback)
-             , ("w", S.wikipedia)
-             , ("y", S.youtube)
-             , ("z", S.amazon)
+             , ("w", S.wayback)
              ]
 
 myScratchPads :: [NamedScratchpad]
@@ -230,13 +193,7 @@ mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 mySpacing' :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing' i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
--- Defining a bunch of layouts, many that I don't use.
-tall     = renamed [Replace "tall"]
-           $ limitWindows 12
-           $ mySpacing 12
-           $ ResizableTall 1 (3/100) (1/2) []
-magnify  = renamed [Replace "magnify"]
-           $ magnifier
+tall     = renamed [Replace "main"]
            $ limitWindows 12
            $ mySpacing 12
            $ ResizableTall 1 (3/100) (1/2) []
@@ -252,11 +209,11 @@ grid     = renamed [Replace "grid"]
 spirals  = renamed [Replace "spirals"]
            $ mySpacing' 12
            $ spiral (6/7)
-threeCol = renamed [Replace "threeCol"]
+threeCol = renamed [Replace "3-col"]
            $ limitWindows 7
            $ mySpacing' 12
            $ ThreeCol 1 (3/100) (1/2)
-threeRow = renamed [Replace "threeRow"]
+threeRow = renamed [Replace "3-row"]
            $ limitWindows 7
            $ mySpacing' 12
            $ Mirror
@@ -273,21 +230,10 @@ tabs     = renamed [Replace "tabs"]
                       , inactiveTextColor   = "#d0d0d0"
                       }
 
--- Theme for showWName which prints current workspace when you change workspaces.
-myShowWNameTheme :: SWNConfig
-myShowWNameTheme = def
-    { swn_font              = myFont
-    , swn_fade              = 1.0
-    , swn_bgcolor           = "#000000"
-    , swn_color             = "#FFFFFF"
-    }
-
--- The layout hook
 myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts floats $
                mkToggle (NBFULL ?? NOBORDERS ?? EOT) myDefaultLayout
              where
                myDefaultLayout =     tall
-                                 ||| magnify
                                  ||| noBorders monocle
                                  ||| floats
                                  ||| grid
@@ -307,7 +253,7 @@ myWorkspaces = map xmobarEscape ["\61728", "\62472", "\62057", "\61557", "\61761
 
 myManageHook :: XMonad.Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
-     [ title =? myBrowser     --> doShift ( myWorkspaces !! 2 )
+     [ className =? myBrowser --> doShift ( myWorkspaces !! 2 )
      , className =? "vlc"     --> doShift ( myWorkspaces !! 6 )
      , (className =? myBrowser <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      ] <+> namedScratchpadManageHook myScratchPads
@@ -319,8 +265,7 @@ myLogHook = fadeInactiveLogHook fadeAmount
 myKeys :: [(String, X ())]
 myKeys =
     -- Xmonad
-        [ ("M-C-r", spawn "xmonad --recompile")
-        , ("M-S-r", spawn "xmonad --restart")
+        [ ("M-S-r", spawn "xmonad --restart")
         , ("M-S-q", io exitSuccess)
 
     -- Shell
@@ -370,8 +315,6 @@ myKeys =
     -- Workspaces
         , ("M-.", nextScreen)  -- Switch focus to next monitor
         , ("M-,", prevScreen)  -- Switch focus to prev monitor
-        , ("M-S-<KP_Add>", shiftTo Next nonNSP >> moveTo Next nonNSP)       -- Shifts focused window to next ws
-        , ("M-S-<KP_Subtract>", shiftTo Prev nonNSP >> moveTo Prev nonNSP)  -- Shifts focused window to prev ws
 
     -- Scratchpads
         , ("M-C-<Return>", namedScratchpadAction myScratchPads "terminal")
@@ -392,10 +335,6 @@ myKeys =
         -- Look at "search engines" section of this config for values for "k".
         ++ [("M-s " ++ k, S.promptSearch myXPConfig' f) | (k,f) <- searchList ]
         ++ [("M-S-s " ++ k, S.selectSearch f) | (k,f) <- searchList ]
-        -- Appending some extra xprompts to keybindings list.
-        -- Look at "xprompt settings" section this of config for values for "k".
-        ++ [("M-p " ++ k, f myXPConfig') | (k,f) <- promptList ]
-        ++ [("M-p " ++ k, f myXPConfig' g) | (k,f,g) <- promptList' ]
         -- The following lines are needed for named scratchpads.
           where nonNSP          = WSIs (return (\ws -> W.tag ws /= "nsp"))
                 nonEmptyNonNSP  = WSIs (return (\ws -> isJust (W.stack ws) && W.tag ws /= "nsp"))
@@ -408,10 +347,7 @@ main = do
     -- Launch xmonad
     xmonad $ ewmh def
         { manageHook = ( isFullscreen --> doFullFloat ) <+> myManageHook <+> manageDocks
-        , handleEventHook    = serverModeEventHookCmd
-                               <+> serverModeEventHook
-                               <+> serverModeEventHookF "XMONAD_PRINT" (io . putStrLn)
-                               <+> docksEventHook
+        , handleEventHook    = docksEventHook
         , modMask            = myModMask
         , terminal           = myTerminal
         , startupHook        = myStartupHook
