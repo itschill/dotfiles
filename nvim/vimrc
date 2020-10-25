@@ -71,7 +71,6 @@ set listchars=tab:̣⭾,nbsp:␣,trail:·
 call plug#begin('~/.vim/plugged')
 
 " Themes
-Plug 'nanotech/jellybeans.vim'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/seoul256.vim'
 Plug 'ghifarit53/tokyonight-vim'
