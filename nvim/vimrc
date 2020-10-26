@@ -83,11 +83,10 @@ Plug 'airblade/vim-gitgutter'                           " Git diff markers
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " Filesystem tree
 Plug 'xuyuanp/nerdtree-git-plugin'                      " Git status for NERDTree
 
-Plug 'junegunn/fzf'                                     " File fuzzy search
 Plug 'majutsushi/tagbar'                                " C-tags
 Plug 'majutsushi/tagbar'                                " Code navigation tag bar
 Plug 'ctrlpvim/ctrlp.vim'                               " CtrlP for fuzzy file/buffer/mru/tag finder
-Plug 'mileszs/ack.vim'                                  " Ack, grep like editting for source code
+Plug 'junegunn/fzf'                                     " File fuzzy search
 
 Plug 'scrooloose/syntastic'                             " Syntax check
 Plug 'w0rp/ale'                                         " Async linting
