@@ -106,8 +106,3 @@ ZSH_ALIASES=$ZSH_CUSTOM/zsh_aliases.zsh
 if [ -f $ZSH_ALIASES ]; then
     source $ZSH_ALIASES
 fi
-
-# Fix Tilix issue (see https://gnunn1.github.io/tilix-web/manual/vteconfig/)
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-        source /etc/profile.d/vte.sh
-fi

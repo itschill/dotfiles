@@ -214,7 +214,7 @@ nnoremap <leader>j :bp<cr>
 nnoremap <leader>k :bn<cr>
 nnoremap <leader>d :bd<cr>
 nnoremap <leader>w :w<cr>
-nnoremap <leader>q :q!<cr>
+nnoremap <leader>q :qa!<cr>
 
 " Line numbers
 nnoremap <silent> <leader>l :set relativenumber!<cr>
