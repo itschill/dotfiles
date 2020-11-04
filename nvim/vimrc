@@ -76,6 +76,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'sainnhe/forest-night'
 Plug 'cocopon/iceberg.vim'
+Plug 'ayu-theme/ayu-vim'
 
 Plug 'tpope/vim-fugitive'                               " Git wrapper
 Plug 'airblade/vim-gitgutter'                           " Git diff markers
@@ -98,6 +99,7 @@ Plug 'vim-airline/vim-airline-themes'                   " Statusline themes
 Plug 'scrooloose/nerdcommenter'                         " Comment functions
 
 Plug 'kien/rainbow_parentheses.vim'                     " Rainbow parentheses
+Plug 'Yggdroot/indentLine'                              " Vertical lines for indentation
 Plug 'jiangmiao/auto-pairs'                             " Auto pairing for parentheses, quotes, etc.
 Plug 'tpope/vim-surround'                               " Surrond editting
 
@@ -120,9 +122,10 @@ Plug 'eagletmt/neco-ghc'                                " Haskell language suppo
 call plug#end()
 
 set termguicolors
-let g:seoul256_background         = 233     " Use darkset background on seoul256 theme
-let g:tokyonight_style            = 'night' " Dark tokyonight theme
-let g:tokyonight_enable_italic    = 1
+let g:seoul256_background      = 233     " Use darkest background on seoul256 theme
+let g:tokyonight_style         = 'night' " Can be storm/night
+let g:tokyonight_enable_italic = 1
+let ayucolor                   = 'dark'  " Can be light/mirage/dark
 colorscheme tokyonight
 
 " Enable filesystem side bar
@@ -150,6 +153,13 @@ let g:airline_powerline_fonts = 1                                   " Use powerl
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved' " Better file names
 "let g:airline#extensions#tabline#left_sep = ' '                     " Straight buffer tabs
 "let g:airline#extensions#tabline#left_alt_sep = '|'                 " Straight buffer tabs
+
+
+"
+" IndentLine
+"
+let g:indentLine_setColors = 0
+let g:indentLine_char = '▏'
 
 "
 " Comments
