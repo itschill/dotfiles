@@ -3,23 +3,10 @@
 #
 # Files
 #
-alias -g vim="nvim"
 alias -g nv="nvim"
 
 alias -g grep="grep --color=auto"
 
-alias -g lessn="less -FXMN"
-
-alias -g tgz="tar cvzf"
-alias -g tbz2="tar cvjf"
-alias -g untar="tar xvf"
-alias -g untgz="tar xvzf"
-alias -g untbz2="tar xvjf"
-
-
-#
-# List
-#
 alias -g l="/opt/coreutils/bin/ls -h --color=auto"
 alias -g ls="exa --icons --color=always --group-directories-first"
 alias -g la="ls --all"
@@ -74,23 +61,6 @@ alias -g genpwd="pwgen -1sy"
 
 
 #
-# Text to Speech
-#
-say () {
-    local text="$@"
-
-    festival -b '(voice_cmu_us_slt_arctic_hts)' "(SayText \"$text\")"
-}
-
-remind () {
-    local reminder="$1"
-    local sleep_time="$2"
-
-    (sleep $sleep_time && say "$reminder") &
-}
-
-
-#
 # Network
 #
 alias renew-ip="sudo dhclient -r && sudo dhclient"
@@ -107,19 +77,14 @@ alias -g temperature="paste <(cat /sys/class/thermal/thermal_zone*/type) <(cat /
 
 
 #
-# Other
+# Git
 #
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-alias debug="set -o nounset; set -o xtrace"
-
 alias glr="git pull --rebase"
 alias gph="git push origin HEAD"
 alias gphf="git push origin HEAD --force-with-lease"
 alias gri="git rebase -i"
 alias grim="git rebase -i master"
 alias gcp="git cherry-pick"
-
-alias whiteout="~/Downloads/magicwand 1,1 -t 20 -f image -r outside -m overlay -o 0"
 
 
 #
@@ -208,21 +173,4 @@ jwt-decode () {
     echo "${parts[3]}" | base64
     echo -n "Expires on: "
     echo "${parts[2]}" | base64 -d | jq '.exp?' | xargs -I {} date -d @{} 2> /dev/null || echo "Never"
-}
-
-
-#
-# Macros
-#
-mouse-record () {
-    local delay="${1:-0}"
-    local events="${2:-10000}"
-
-    cnee --record -o events.xnr --mouse --events-to-record $events --time $delay
-}
-
-mouse-replay () {
-    local delay="${1:-0}"
-
-    cnee --replay -f events.xnr --time $delay
 }
