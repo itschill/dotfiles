@@ -57,6 +57,7 @@ set hidden          " Allow buffers to not need windows
 set noswapfile      " Disable swap files
 set nobackup        " No backup before overwriting a file
 set nowritebackup   " No backup before overwriting a file
+set undofile        " Allow undo after closing and re-opening neovim
 
 "
 " Line handling
