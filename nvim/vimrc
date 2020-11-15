@@ -4,14 +4,15 @@ filetype plugin indent on
 "
 " General
 "
-let mapleader=" "   " Remap leader to space
-syntax on           " Enable syntax highlighting
-set encoding=UTF-8  " Use UTF-8 encoding
-set mouse=a         " Enable mouse support
-set history=1000    " More history commands
-set undolevels=1000 " More undos
-set showmatch       " Show matching parenthesis
-set title           " Set terminal title
+let mapleader=' '         " Remap leader to space
+syntax on                 " Enable syntax highlighting
+set encoding=UTF-8        " Use UTF-8 encoding
+set mouse=a               " Enable mouse support
+set history=1000          " More history commands
+set undolevels=1000       " More undos
+set showmatch             " Show matching parenthesis
+set title                 " Set terminal title
+set clipboard=unnamedplus " Use system clipboard
 
 "
 " Indentation
