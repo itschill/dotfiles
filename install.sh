@@ -15,7 +15,7 @@ while read -r file destination; do
     filepath="$directory/$file"
     link="${destination//\~/\~$user}"
 
-    if [ -e $filepath ]; then
+    if [ -e "$filepath" ]; then
         echo "Binding $link to file $filepath"
         ln -sfn "$filepath" $(eval echo "$link")
     else
