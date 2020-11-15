@@ -86,7 +86,6 @@ Plug 'xuyuanp/nerdtree-git-plugin'                      " Git status for NERDTre
 
 Plug 'majutsushi/tagbar'                                " C-tags
 Plug 'majutsushi/tagbar'                                " Code navigation tag bar
-Plug 'ctrlpvim/ctrlp.vim'                               " CtrlP for fuzzy file/buffer/mru/tag finder
 Plug 'junegunn/fzf'                                     " File fuzzy search
 
 Plug 'scrooloose/syntastic'                             " Syntax check
@@ -265,8 +264,7 @@ nnoremap <leader>dw :VimspectorWatch
 nnoremap <leader>do :VimspectorShowOutput
 
 " Side-bars
-nnoremap <leader>` :NERDTreeToggle<cr> :TagbarToggle<cr>
+nnoremap <leader>` :NERDTreeToggle<cr> :TagbarToggle<cr> :wincmd p<cr>
 
 " Searching
-nnoremap <leader>ff :FZF<cr>
-nnoremap <leader>fp :CtrlP<cr>
+nnoremap <leader>f :FZF<cr>
