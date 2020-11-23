@@ -10,7 +10,7 @@ set encoding=UTF-8        " Use UTF-8 encoding
 set mouse=a               " Enable mouse support
 set history=1000          " More history commands
 set undolevels=1000       " More undos
-set showmatch             " Show matching parenthesis
+set noshowmatch           " Do not jump cursor to matching parenthesis
 set title                 " Set terminal title
 set clipboard=unnamedplus " Use system clipboard
 
@@ -116,8 +116,8 @@ Plug 'ryanoasis/vim-devicons'                           " Dev icons
 
 Plug 'vim-scripts/LargeFile'                            " Large file support
 
-Plug 'rust-lang/rust.vim'                               " Rust language support
-Plug 'eagletmt/neco-ghc'                                " Haskell language support
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }            " Rust language support
+Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }          " Haskell language support
 
 " Initialize plugin system
 call plug#end()
@@ -192,11 +192,25 @@ let g:ale_sign_warning = '⚠⚠'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_linters = {'rust': ['analyzer']}
 
 "
 " Rust
 "
 let g:rustfmt_autosave = 1 " Rust formatting on buffer write
+
+"
+" YCM
+"
+let g:ycm_language_server =
+\ [
+\   {
+\     'name': 'rust',
+\     'cmdline': ['rust-analyzer'],
+\     'filetypes': ['rust'],
+\     'project_root_files': ['Cargo.toml']
+\   }
+\ ]
 
 " GitGutter status line
 function! GitStatus()
@@ -221,6 +235,7 @@ inoremap <silent> <PageDown> <C-O>1000<C-D>
 cnoremap w!! w !sudo tee % > /dev/null
 
 " Easy swap between buffers
+nnoremap <leader><leader> <c-^>
 nnoremap <leader>j :bp<cr>
 nnoremap <leader>k :bn<cr>
 nnoremap <leader>d :bd<cr>

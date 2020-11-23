@@ -42,6 +42,14 @@ alias -g free="free -h"
 alias dropcaches="sync && sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'"
 alias mounted="mount | column -t"
 
+system-update () {
+    sudo pacman -Syu
+    yay -Syu
+    rustup update
+    stack update
+    nvim --headless +PlugUpdate +qall
+}
+
 
 #
 # Cool Stuff
