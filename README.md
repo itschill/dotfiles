@@ -2,4 +2,4 @@
 
 ## How to install
 
-Run `./install.sh` to replace all configuration files with symlinks.
+Run `sudo ./install.sh` to replace all configuration files with symlinks.
