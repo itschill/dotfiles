@@ -2,13 +2,13 @@
 alacritty/alacritty.yml      ~/.alacritty.yml
 git/gitconfig                ~/.gitconfig
 gtk-3.0/settings.ini         ~/.config/gtk-3.0/settings.ini
+nvim/coc-settings.json       ~/.config/nvim/coc-settings.json
 nvim/vimrc                   ~/.vimrc
 redshift/redshift.conf       ~/.config/redshift/redshift.conf
 x/Xresources                 ~/.Xresources
 x/xsession                   ~/.xsession
 xmobar/xmobarrc              ~/.xmobarrc
 xmonad/xmonad.hs             ~/.xmonad/xmonad.hs
-xmonad/xmonadctl.hs          ~/.xmonad/xmonadctl.hs
 zsh/bullet-train.zsh-theme   /usr/share/oh-my-zsh/custom/themes/bullet-train.zsh-theme
 zsh/zsh_aliases.zsh          /usr/share/oh-my-zsh/custom/zsh_aliases.zsh
 zsh/zshrc                    /usr/share/oh-my-zsh/zshrc
