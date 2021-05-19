@@ -1,1 +1,5 @@
-{ "rust-analyzer.serverPath": "/usr/bin/rust-analyzer" }
+{
+    "rust-analyzer.serverPath": "/usr/bin/rust-analyzer",
+    "rust-analyzer.completion.autoimport.enable": true
+}
+
